@@ -167,25 +167,31 @@ def run_agent(
     if any(c["menu"].get("menus_found") for c in competitors_raw):
         data_sources.append("Claude vision (menu extraction)")
 
-    # --- Step 4: Yelp data for target + top competitors --------------------
-    say("Fetching reviews...")
-    target_yelp = yelp.get_yelp_business(restaurant_name, city)
-    if target_yelp.get("found"):
-        target_yelp["reviews"] = yelp.get_yelp_reviews(target_yelp["business_id"])
-        data_sources.append("Yelp Fusion (reviews, max 3/business)")
+    # --- Step 4: Yelp data for target + top competitors (optional) ---------
+    # Skipped gracefully if no Yelp key is configured.
+    target_yelp: dict[str, Any] = {"found": False}
+    if config.YELP_API_KEY:
+        say("Fetching reviews...")
+        target_yelp = yelp.get_yelp_business(restaurant_name, city)
+        if target_yelp.get("found"):
+            target_yelp["reviews"] = yelp.get_yelp_reviews(target_yelp["business_id"])
+            data_sources.append("Yelp Fusion (reviews, max 3/business)")
 
-    for comp in competitors_raw[:_ENRICH_TOP_N]:
-        biz = yelp.get_yelp_business(comp.get("name") or "", city)
-        if biz.get("found"):
-            biz["reviews"] = yelp.get_yelp_reviews(biz["business_id"])
-        comp["yelp"] = biz
+        for comp in competitors_raw[:_ENRICH_TOP_N]:
+            biz = yelp.get_yelp_business(comp.get("name") or "", city)
+            if biz.get("found"):
+                biz["reviews"] = yelp.get_yelp_reviews(biz["business_id"])
+            comp["yelp"] = biz
 
-    # --- Step 5: local events ----------------------------------------------
-    say("Checking local events...")
-    target_day = _next_weekday_from_problem(problem)
-    events_data = events_tool.get_local_events(city, target_day)
-    if events_data:
-        data_sources.append("Ticketmaster Discovery (local events)")
+    # --- Step 5: local events (optional) -----------------------------------
+    # Skipped gracefully if no Ticketmaster key is configured.
+    events_data: list[dict[str, Any]] = []
+    if config.TICKETMASTER_API_KEY:
+        say("Checking local events...")
+        target_day = _next_weekday_from_problem(problem)
+        events_data = events_tool.get_local_events(city, target_day)
+        if events_data:
+            data_sources.append("Ticketmaster Discovery (local events)")
 
     # --- Step 6: competitor websites for specials (best-effort) ------------
     for comp in competitors_raw[:_ENRICH_TOP_N]:

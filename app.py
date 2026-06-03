@@ -20,13 +20,31 @@ _PRIORITY_EMOJI = {"high": "🔴", "medium": "🟡", "low": "🟢"}
 
 
 def _missing_keys() -> list[str]:
-    names = [
-        "ANTHROPIC_API_KEY",
-        "GOOGLE_PLACES_API_KEY",
-        "YELP_API_KEY",
-        "TICKETMASTER_API_KEY",
-    ]
-    return [n for n in names if not getattr(config, n)]
+    """Required keys only. Yelp + Ticketmaster are optional (skipped if unset)."""
+    return [n for n in config.REQUIRED_KEYS if not getattr(config, n)]
+
+
+def _check_password() -> bool:
+    """Gate the app behind a password if APP_PASSWORD is set.
+
+    Returns True if access is granted (no password configured, or correct one
+    entered). Protects the owner's API budget on a public demo link.
+    """
+    if not config.APP_PASSWORD:
+        return True  # no password set → open (local dev / private use)
+    if st.session_state.get("authed"):
+        return True
+
+    st.info("This demo is password protected to limit API costs. Enter the password to continue.")
+    with st.form("login"):
+        pw = st.text_input("Password", type="password")
+        if st.form_submit_button("Enter"):
+            if pw == config.APP_PASSWORD:
+                st.session_state["authed"] = True
+                st.rerun()
+            else:
+                st.error("Incorrect password.")
+    return False
 
 
 def _render_report(report: dict) -> None:
@@ -98,6 +116,9 @@ def main() -> None:
         "competitor data, reads menus via vision AI, and returns specific, "
         "data-grounded recommendations."
     )
+
+    if not _check_password():
+        return
 
     missing = _missing_keys()
     if missing:

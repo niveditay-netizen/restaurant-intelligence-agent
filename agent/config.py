@@ -33,6 +33,14 @@ GOOGLE_PLACES_API_KEY = os.environ.get("GOOGLE_PLACES_API_KEY", "")
 YELP_API_KEY = os.environ.get("YELP_API_KEY", "")
 TICKETMASTER_API_KEY = os.environ.get("TICKETMASTER_API_KEY", "")
 
+# Required to run the app (Google for data, Anthropic for vision + synthesis).
+# Yelp + Ticketmaster are optional — the agent skips them if their key is unset.
+REQUIRED_KEYS = ("ANTHROPIC_API_KEY", "GOOGLE_PLACES_API_KEY")
+
+# Optional gate for a public demo: if set, the UI requires this password before
+# anyone can run an (API-cost-incurring) analysis. Unset = open (local dev).
+APP_PASSWORD = os.environ.get("APP_PASSWORD", "")
+
 
 # --- Tunable knobs ----------------------------------------------------------
 MAX_COMPETITORS = 5            # competitors pulled from Nearby Search
