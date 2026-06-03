@@ -1,0 +1,142 @@
+[
+  {
+    "id": "retrieval_001",
+    "category": "retrieval",
+    "input": {"restaurant_name": "Piccolo Forno", "city": "Pittsburgh", "problem": "slow Tuesday dinners"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_002",
+    "category": "retrieval",
+    "input": {"restaurant_name": "Nicky's Thai Kitchen", "city": "Pittsburgh", "problem": "lunch is underperforming"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_003",
+    "category": "retrieval",
+    "input": {"restaurant_name": "Gaucho Parrilla Argentina", "city": "Pittsburgh", "problem": "general analysis"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_004",
+    "category": "retrieval",
+    "input": {"restaurant_name": "Pamela's Diner", "city": "Pittsburgh", "problem": "weekday breakfast is slow"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_005",
+    "category": "retrieval",
+    "input": {"restaurant_name": "Mineo's Pizza House", "city": "Pittsburgh", "problem": "too many pizza competitors nearby"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_006",
+    "category": "retrieval",
+    "input": {"restaurant_name": "Spice Island Tea House", "city": "Pittsburgh", "problem": "dinner traffic dropping"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_007",
+    "category": "retrieval",
+    "input": {"restaurant_name": "The Capital Grille", "city": "Pittsburgh", "problem": "general analysis"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "retrieval_008",
+    "category": "retrieval",
+    "input": {"restaurant_name": "DiAnoia's Eatery", "city": "Pittsburgh", "problem": "weekend brunch competition"},
+    "expected": {"target_found": true, "min_competitors_found": 3},
+    "pass_criteria": "target restaurant found AND at least 3 competitors identified"
+  },
+  {
+    "id": "quality_001",
+    "category": "quality",
+    "input": {"restaurant_name": "Nicky's Thai Kitchen", "city": "Pittsburgh", "problem": "lunch service is underperforming"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_002",
+    "category": "quality",
+    "input": {"restaurant_name": "Piccolo Forno", "city": "Pittsburgh", "problem": "slow Tuesday dinners"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_003",
+    "category": "quality",
+    "input": {"restaurant_name": "Gaucho Parrilla Argentina", "city": "Pittsburgh", "problem": "lunch crowd is thin"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_004",
+    "category": "quality",
+    "input": {"restaurant_name": "Mineo's Pizza House", "city": "Pittsburgh", "problem": "margins are tight on lunch"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_005",
+    "category": "quality",
+    "input": {"restaurant_name": "Spice Island Tea House", "city": "Pittsburgh", "problem": "few repeat customers"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_006",
+    "category": "quality",
+    "input": {"restaurant_name": "DiAnoia's Eatery", "city": "Pittsburgh", "problem": "weeknight dinners are quiet"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_007",
+    "category": "quality",
+    "input": {"restaurant_name": "Pamela's Diner", "city": "Pittsburgh", "problem": "no dinner business"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "quality_008",
+    "category": "quality",
+    "input": {"restaurant_name": "Fet-Fisk", "city": "Pittsburgh", "problem": "hard to differentiate from neighbors"},
+    "expected": {"recommendations_count": 3, "each_recommendation_has_rationale": true, "no_generic_advice": true},
+    "pass_criteria": "3 recommendations, each with a specific data citation, no generic phrases"
+  },
+  {
+    "id": "hallucination_001",
+    "category": "hallucination",
+    "input": {"restaurant_name": "Piccolo Forno", "city": "Pittsburgh", "problem": "general analysis"},
+    "check": "all competitor names in output must match names returned by Google Places API",
+    "pass_criteria": "zero fabricated restaurant names in output"
+  },
+  {
+    "id": "hallucination_002",
+    "category": "hallucination",
+    "input": {"restaurant_name": "Nicky's Thai Kitchen", "city": "Pittsburgh", "problem": "general analysis"},
+    "check": "all competitor names in output must match names returned by Google Places API",
+    "pass_criteria": "zero fabricated restaurant names in output"
+  },
+  {
+    "id": "hallucination_003",
+    "category": "hallucination",
+    "input": {"restaurant_name": "Mineo's Pizza House", "city": "Pittsburgh", "problem": "general analysis"},
+    "check": "all competitor names in output must match names returned by Google Places API",
+    "pass_criteria": "zero fabricated restaurant names in output"
+  },
+  {
+    "id": "hallucination_004",
+    "category": "hallucination",
+    "input": {"restaurant_name": "Gaucho Parrilla Argentina", "city": "Pittsburgh", "problem": "general analysis"},
+    "check": "all competitor names in output must match names returned by Google Places API",
+    "pass_criteria": "zero fabricated restaurant names in output"
+  }
+]

@@ -1,0 +1,29 @@
+# Environment / secrets
+.env
+.env.local
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Eval / runtime artifacts
+eval/results/
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
