@@ -6,7 +6,7 @@ public APIs, **reads competitor menus from photos via vision AI**, and returns s
 data-grounded recommendations — framed the way a strategy consultant would, not as a raw
 JSON dump.
 
-**Live demo:** _coming soon_ (deploy to Streamlit Community Cloud — see below)
+**Live demo:** https://restaurant-intelligence-agent-n96g2rmvfqcmlpmtzrnpuh.streamlit.app/ (password-protected to limit API costs)
 
 ---
 
