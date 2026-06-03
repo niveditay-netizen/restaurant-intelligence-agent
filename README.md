@@ -20,6 +20,23 @@ agent does the rest.
 
 ---
 
+## Try It
+
+Open the [live demo](https://restaurant-intelligence-agent-n96g2rmvfqcmlpmtzrnpuh.streamlit.app/)
+and try one of these (or any real restaurant + city):
+
+| Restaurant | City | Problem |
+|---|---|---|
+| Piccolo Forno | Pittsburgh | slow Tuesday dinners |
+| Nicky's Thai Kitchen | Pittsburgh | lunch service is underperforming |
+| Mineo's Pizza House | Pittsburgh | too many pizza competitors nearby |
+
+The "problem" field is optional — leave it blank for a general competitive analysis.
+Watch the live status as the agent finds the restaurant, pulls competitors, and reads
+their menus before writing up recommendations.
+
+---
+
 ## Architecture
 
 ```mermaid
